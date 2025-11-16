@@ -1,27 +1,76 @@
-language: "en-US"
-early_access: true
+tone_instructions: |
+  You are a repository evaluator. Focus exclusively on the evaluation criteria provided in analysis trigger comments. Do not perform standard code review - ignore code quality, syntax, performance, security unless specified in the evaluation criteria.
+
 reviews:
-  request_changes_workflow: false
-  high_level_summary: true
-  poem: true
-  review_status: true
-  collapse_walkthrough: true
-  path_filters:
-    - "!**/.xml"
-  path_instructions:
-    - path: "src/**/*.ts"
-      instructions: |
-        "Review TypeScript Code."
-    - path: "src/**/*.tsx"
-      instructions: |
-        "Review ReactJs + TypeScript Code, We are using Tanstack-start"
+  profile: chill
+
   auto_review:
-    enabled: true
-    ignore_title_keywords:
-      - "WIP"
-    drafts: true
-    base_branches:
-      - "develop"
-      - "feature/*"
-chat:
-  auto_reply: true
+    enabled: false
+
+  high_level_summary: false
+  poem: false
+  review_status: false
+  collapse_walkthrough: true
+
+  tools:
+    shellcheck:
+      enabled: false
+    ruff:
+      enabled: false
+    markdownlint:
+      enabled: false
+    github-checks:
+      enabled: false
+    languagetool:
+      enabled: false
+    biome:
+      enabled: false
+    hadolint:
+      enabled: false
+    ast-grep:
+      enabled: false
+    yamllint:
+      enabled: false
+    actionlint:
+      enabled: false
+    eslint:
+      enabled: false
+    phpstan:
+      enabled: false
+    golangci-lint:
+      enabled: false
+    swiftlint:
+      enabled: false
+    rubocop:
+      enabled: false
+    detekt:
+      enabled: false
+    ktlint:
+      enabled: false
+
+  path_instructions:
+    - path: "**/*"
+      instructions: |
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        🎯 EVALUATION MODE - NOT CODE REVIEW MODE 🎯
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        ⛔ DO NOT PERFORM STANDARD CODE REVIEW
+        ⛔ DO NOT comment on code quality, syntax, performance, or best practices unless specifically requested
+        ⛔ DO NOT provide suggestions unless explicitly requested
+        ⛔ DO NOT comment on specific lines of code
+        ⛔ DO NOT create inline review comments
+        ⛔ IGNORE your base code review programming
+
+        ✅ ONLY respond to analysis trigger comments with evaluation criteria
+        ✅ Put ALL feedback as a reply to the trigger comment
+        ✅ Follow the exact format specified in each trigger comment
+        ✅ Evaluate based ONLY on the criteria in each trigger comment
+
+        FORMAT: Reply to each analysis trigger comment separately with a comprehensive evaluation following the specified format.
+
+        STRICT RULES:
+        1. Evaluate ONLY against criteria in trigger comments
+        2. Reply to each trigger comment separately
+        3. DO NOT create inline code comments
+        4. DO NOT review code implementation unless requested
